@@ -9,7 +9,7 @@ jobs:
       # GITHUB_TOKEN: '' # MUST BE SECRET & PUT IN CIRCLECI PROJECT ENV VARS
       VENDOR: 'Cherry_Mobile' # MANDATORY
       CODENAME: 'X930' # MANDATORY
-      FLAVOR: 'userdebug' # MANDATORY
+      FLAVOR: 'eng' # MANDATORY
     working_directory: /home/builder/android
     steps:
       - run:
