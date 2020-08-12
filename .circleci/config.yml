@@ -9,7 +9,7 @@ jobs:
       # GITHUB_TOKEN: '' # MUST BE SECRET & PUT IN CIRCLECI PROJECT ENV VARS
       VENDOR: 'Cherry_Mobile' # MANDATORY
       CODENAME: 'X930' # MANDATORY
-      FLAVOR: 'userdebug' # MANDATORY
+      FLAVOR: 'eng' # MANDATORY
     working_directory: /home/builder/android
     steps:
       - run:
@@ -40,10 +40,10 @@ jobs:
             cd ../ && sed -i '/darwin/d' manifest.xml && cd ../
             
             # Local manifests. Some builds fail if the file path does not exist.
-            mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/Flare_S8.xml
+            mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/X930.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <manifest>
-            <project path="device/Cherry_Mobile/X930" name="loveleyz/x930_Cherry_Mobile_Flare_S8" revision="master" remote="github" />
+            <project path="device/Cherry_Mobile/X930" name="loveleyz/X930" revision="master" remote="github" />
             </manifest>
             EOF
             
@@ -63,7 +63,7 @@ jobs:
             echo -e "\nPreparing Delicious Lunch..."
             export ALLOW_MISSING_DEPENDENCIES=true
             source build/envsetup.sh
-            lunch omni_Flare_S8-eng
+            lunch omni_X930-eng
             
             # Keep the whole .repo/manifests folder
             cp -a .repo/manifests $(pwd)/
@@ -93,3 +93,4 @@ workflows:
             context: personal-envs
           # if you are copy-pasting this script,
           # set $GitHubMail, $GitHubName and $GITHUB_TOKEN in the environment variables
+
