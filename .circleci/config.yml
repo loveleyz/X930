@@ -63,7 +63,7 @@ jobs:
             echo -e "\nPreparing Delicious Lunch..."
             export ALLOW_MISSING_DEPENDENCIES=true
             source build/envsetup.sh
-            lunch omni_Flare_S8-eng
+            lunch omni_X930-eng
             
             # Keep the whole .repo/manifests folder
             cp -a .repo/manifests $(pwd)/
