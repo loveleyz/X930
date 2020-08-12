@@ -40,7 +40,7 @@ jobs:
             cd ../ && sed -i '/darwin/d' manifest.xml && cd ../
             
             # Local manifests. Some builds fail if the file path does not exist.
-            mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/Flare_S8.xml
+            mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/X930.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <manifest>
             <project path="device/Cherry_Mobile/X930" name="loveleyz/X930" revision="master" remote="github" />
