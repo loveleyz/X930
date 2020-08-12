@@ -43,7 +43,7 @@ jobs:
             mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/Flare_S8.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <manifest>
-            <project path="device/Cherry_Mobile/X930" name="loveleyz/x930_Cherry_Mobile_Flare_S8" revision="master" remote="github" />
+            <project path="device/Cherry_Mobile/X930" name="loveleyz/X930" revision="master" remote="github" />
             </manifest>
             EOF
             
