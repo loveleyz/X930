@@ -23,6 +23,11 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT="Cherry_Mobile/Flare_S8/X930:9/PPR1.180610.011/0710141239:user/release-keys" \
     PRIVATE_BUILD_DESC="Flare_S8-user 9 PPR1.180610.011 1559618636 release-keys"
 
+#hack vendor patch level
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.build.version.security_patch=2019-05-05
+PLATFORM_SECURITY_PATCH := 2020-07-05
+
 # enable stock zip packages flash
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.treble.enabled=true \
