@@ -43,14 +43,14 @@ jobs:
             mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/Flare_S8.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <manifest>
-            <project path="device/Cherry_Mobile/Flare_S8" name="loveleyz/x930_Cherry_Mobile_Flare_S8" revision="twrp-9.0" remote="github" />
+            <project path="device/Cherry_Mobile/Flare_S8" name="loveleyz/X930" revision="master" remote="github" />
             </manifest>
             EOF
             
             repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
             
-            #rm -rf bootable/recovery
-            #git clone --quiet --progress https://github.com/loveleyz/android_bootable_recovery -b android-9.0 --single-branch bootable/recovery
+            rm -rf bootable/recovery
+            git clone --quiet --progress https://github.com/PeterCxy/android_bootable_recovery -b android-9.0 --single-branch bootable/recovery
             
             # Unshallow vendor_omni
             repo forall vendor/omni -c "git fetch --unshallow omnirom android-9.0"
@@ -89,7 +89,7 @@ workflows:
       - build:
         filters:
             branches:
-              only: 'twrp-9.0'
+              only: 'master'
             context: personal-envs
           # if you are copy-pasting this script,
           # set $GitHubMail, $GitHubName and $GITHUB_TOKEN in the environment variables
