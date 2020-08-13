@@ -1,6 +1,12 @@
 import /trustkernel.rc
 
 on init
+     # Somehow AOSP build system hasn't provided a symlink here
+    symlink /system_root/system /system
+    # Create a more standard /dev/block layout for our scripts
+    symlink /dev/block/platform/bootdevice /dev/block/bootdevice
+
+    start logd
     mkdir /config
     mount configfs none /config
     mkdir /config/usb_gadget/g1 0770 shell shell
@@ -14,12 +20,13 @@ on init
     mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     setprop sys.usb.ffs.aio_compat 1
+    
     mkdir /vendor/lib64 0700 root root
     mkdir /vendor/lib64/hw 0700 root root
     symlink /vendor/manifest.xml /system_root/system/manifest.xml
-    symlink /sbin/keystore.mt6771.so /vendor/lib64/hw/keystore.mt6771.so
+    symlink /sbin/keystore.mt6763.so /vendor/lib64/hw/keystore.mt6763.so
     symlink /sbin/keystore.v2.trustkernel.so /vendor/lib64/hw/keystore.v2.trustkernel.so
-    symlink /sbin/gatekeeper.mt6771.so /vendor/lib64/hw/gatekeeper.mt6771.so
+    symlink /sbin/gatekeeper.mt6763.so /vendor/lib64/hw/gatekeeper.mt6763.so
     start hwservicemanager
     setprop crypto.ready 1
 
