@@ -135,3 +135,7 @@ subsystem sound
 
 # DVB API device nodes
 /dev/dvb*                 0660   root       system
+
+#TrustKernel TEE
+/dev/tkcoredrv           0666    root      root
+/dev/block/platform/bootdevice/by-name/sdrpmb 0660 root system
