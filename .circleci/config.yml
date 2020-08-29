@@ -7,8 +7,8 @@ jobs:
       # MANIFEST_BR: '9.0' # Optional: State SHRP Manifest Branch. i.e., '9.0' or other
       VENDOR: 'Cherry_Mobile' # State Product Vendor or Manufacturer
       CODENAME: 'X930' # Device Codename
-      GitHubMail: '' # Enter GitHub User EMail Address
-      GitHubName: '' # Enter GitHub Username
+      # GitHubMail: '' # Enter GitHub User EMail Address
+      # GitHubName: '' # Enter GitHub Username
       # Add the following Token in encrypted form inside CircleCI
       # GITHUB_TOKEN: '' # GitHub OAuth Token, for release
       EXTRA_CMD: "cd bootable/recovery; patch -p1 < ../../device/${VENDOR}/${CODENAME}/patches/bootable/recovery/*.patch || true; cd ../.."
