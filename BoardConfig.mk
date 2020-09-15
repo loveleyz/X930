@@ -23,7 +23,8 @@ TARGET_BOOTLOADER_BOARD_NAME := mt6763
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-BOARD_HEADER_VERSION := 1
+BOARD_OS_PATCH_LEVEL := 2020-07-05
+BOARD_BOOTIMG_HEADER_VERSION := 1
 BOARD_HEADER_SIZE := 1648
 BOARD_HASH_TYPE := sha1
 BOARD_KERNEL_BASE := 0x40078000
@@ -82,7 +83,7 @@ TW_DEVICE_VERSION := Flare S8 by Nanik
 RECOVERY_SDCARD_ON_DATA := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/battery"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun%d/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 TARGET_DISABLE_TRIPLE_BUFFERING := false
 TW_THEME := portrait_hdpi
