@@ -43,7 +43,7 @@ jobs:
             mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/x930.xml
             <?xml version="1.0" encoding="UTF-8"?>
             <manifest>
-            <project path="device/cherry_cobile/x930" name="loveleyz/X930" revision="ofrp-9.0" remote="github" />
+            <project path="device/cherry_mobile/x930" name="loveleyz/X930" revision="ofrp-9.0" remote="github" />
             </manifest>
             EOF
             
