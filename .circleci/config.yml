@@ -1,0 +1,96 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: fr3akyphantom/droid-builder:edge
+    environment:
+      # GitHubMail: "" # Git User Email Address
+      # GitHubName: "" # Git Username
+      # GITHUB_TOKEN: '' # MUST BE SECRET & PUT IN CIRCLECI PROJECT ENV VARS
+      VENDOR: 'Cherry_Mobile' # MANDATORY
+      CODENAME: 'x930' # MANDATORY
+      FLAVOR: 'userdebug' # MANDATORY
+    working_directory: /home/builder/orangefox
+    steps:
+      - run:
+          name: AIO Build
+          command: |
+            # SANITY CHECKS
+            if [[ -z $GitHubMail ]]; then echo -e "You haven't configured GitHub E-Mail Address." && exit 1; fi
+            if [[ -z $GitHubName ]]; then echo -e "You haven't configured GitHub Username." && exit 1; fi
+            if [[ -z $GITHUB_TOKEN ]]; then echo -e "You haven't configured GitHub Token.\nWithout it, recovery can't be published." && exit 1; fi
+            if [[ -z $VENDOR ]]; then echo -e "You haven't configured Vendor name." && exit 1; fi
+            if [[ -z $CODENAME ]]; then echo -e "You haven't configured Device Codename." && exit 1; fi
+            if [[ -z $FLAVOR ]]; then echo -e "Set as 'eng' or 'userdebug'." && exit 1; fi
+            # Set GitAuth Infos"
+            git config --global user.email $GitHubMail
+            git config --global user.name $GitHubName
+            git config --global credential.helper store
+            git config --global color.ui true
+           
+            cd /home/builder/orangefox
+            
+            echo -e "Initializing minimal manifest repo sync..."
+            repo init --depth=1 -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0
+            
+            echo -e "\nRemoving Unimportant Darwin-specific Files from syncing"
+            cd .repo/manifests
+            find . -type f -name '*.xml' | xargs sed -i '/darwin/d'
+            git commit -a -m "Magic" || true
+            cd ../ && sed -i '/darwin/d' manifest.xml && cd ../
+            
+            # Local manifests. Some builds fail if the file path does not exist.
+            mkdir -p .repo/local_manifests && cat \<<EOF > .repo/local_manifests/x930.xml
+            <?xml version="1.0" encoding="UTF-8"?>
+            <manifest>
+            <project path="device/cherry_cobile/x930" name="loveleyz/X930" revision="ofrp-9.0" remote="github" />
+            </manifest>
+            EOF
+            
+            repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+            
+            # Unshallow vendor_omni
+            repo forall vendor/omni -c "git fetch --unshallow omnirom android-9.0"
+            # Retain "roomservice: Do not overwrite existing repositories"
+            repo forall vendor/omni -c "git revert 718f4c2fd6890f5eaa2d4972b1c3f3f582b5da47 -Xtheirs --no-edit --no-commit"
+            # Retain "roomservice: Do not overwrite existing devices"
+            repo forall vendor/omni -c "git revert 380d19cea2857d5901d7e7163f65ccc66d7bbad7 -Xtheirs --no-edit --no-commit"
+            # Add those retains into local commit
+            repo forall vendor/omni -c "git commit -m 'Fix Build from forked/personal repos'"
+            echo -e "\nPreparing Delicious Lunch..."
+            export ALLOW_MISSING_DEPENDENCIES=true
+            export LC_ALL="C"
+            source build/envsetup.sh
+            lunch omni_x930-eng
+            mkdir -p /home/builder/orangefox/out/target/product/x930/system/etc
+            touch /home/builder/orangefox/out/target/product/x930/system/etc/ld.config.txt
+            
+            # Keep the whole .repo/manifests folder
+            cp -a .repo/manifests $(pwd)/
+            echo "Cleaning up the .repo folder to slim down the build system"
+            rm -rf .repo
+            mkdir -p .repo && mv manifests .repo/ && ln -s .repo/manifests/default.xml .repo/manifest.xml
+            
+            export nowTime=$(date +%Y%m%d-%H%M)
+            echo -e "\nBuilding Started, Please wait patiently...\n"
+            make -j$(nproc --all) recoveryimage
+            echo "Ready to Deploy"
+            mkdir upload
+            export version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
+            cp out/target/product/${CODENAME}/recovery.img upload/OFRP-${version}-${CODENAME}-$nowTime-Unofficial.img
+            cp out/target/product/${CODENAME}/*.img upload/
+            cp out/target/product/${CODENAME}/ramdisk* upload/
+            cp out/target/product/${CODENAME}/*.zip upload/
+            ls -lA upload/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -n "Test OrangeFox Recovery Release for $(echo $CODENAME)" -b "OFRP $(echo $version)" -delete ofrp_v${version} upload/
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+        filters:
+            branches:
+              only: 'ofrp-9.0'
+            context: personal-envs
+          # if you are copy-pasting this script,
+          # set $GitHubMail, $GitHubName and $GITHUB_TOKEN in the environment variables
