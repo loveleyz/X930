@@ -1,5 +1,5 @@
 ro.product.brand=Chery_Mobile
 ro.product.name=Flare_S8
-ro.product.device=X930
-ro.build.product=X930
+ro.product.device=x930
+ro.build.product=x930
 ro.treble.enabled=true
