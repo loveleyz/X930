@@ -5,7 +5,7 @@ jobs:
       - image: fr3akyphantom/droid-builder:focal
     environment:
       MANIFEST_BR: 'android-9.0' # Optional: State SHRP Manifest Branch. i.e., '9.0' or other
-      VENDOR: 'Cherry_Mobile' # State Product Vendor or Manufacturer
+      VENDOR: 'cherry_mobile' # State Product Vendor or Manufacturer
       CODENAME: 'x930' # Device Codename
       # GitHubMail: '' # Enter GitHub User EMail Address. Has been set in context.
       # GitHubName: '' # Enter GitHub Username. Has been set in context.
