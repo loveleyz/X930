@@ -1,5 +1,5 @@
 # Device path
-BOARD_VENDOR := Cherry_Mobile
+BOARD_VENDOR := cherry_mobile
 LOCAL_PATH := device/cherry_mobile/x930
 
 # Architecture
