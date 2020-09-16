@@ -1,5 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter x930,$(TARGET_DEVICE)),)
+ifneq ($(TARGET_DEVICE),x930)
 include $(call all-makefiles-under,$(LOCAL_PATH))
+include $(CLEAR_VARS)
 endif
