@@ -61,7 +61,7 @@ jobs:
             export ALLOW_MISSING_DEPENDENCIES=true
             export LC_ALL="C"
             source build/envsetup.sh
-            lunch omni_Flare_S8-userdebug
+            lunch omni_x930-userdebug
             
             # Keep the whole .repo/manifests folder
             cp -a .repo/manifests $(pwd)/
