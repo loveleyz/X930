@@ -115,6 +115,10 @@ HAVE_SELINUX := true
 # Excludes
 TW_EXCLUDE_TWRPAPP := true
 
+# Hack: prevent anti rollback
+PLATFORM_SECURITY_PATCH := 2099-12-31
+PLATFORM_VERSION := 16.1.0
+
 #SkyHawk Recovery Project Build Flags
 # NOTE - Dont use '-' or blank spaces in flag values , otherwise it will create build errors or other bugs in recovery (Excluding SHRP_PATH,SHRP_REC). 
 # Path of your SHRP Tree
