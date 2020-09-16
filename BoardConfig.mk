@@ -29,10 +29,13 @@ BOARD_HEADER_SIZE := 1648
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_HASH_TYPE := sha1
 BOARD_KERNEL_BASE := 0x40078000
-BOARD_MKBOOTIMG_ARGS := --base 0x40078000 --ramdisk_offset 0x14f88000 --second_offset 0x00e88000 --tags_offset 0x13f88000
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x14f88000
+BOARD_SECOND_OFFSET := 0x00e88000
+BOARD_TAGS_OFFSET := 0x13f88000
+BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --second_offset $(BOARD_SECOND_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/zImage
 BOARD_KERNEL_IMAGE_NAME := zImage
-
 # DTBO Rules
 BOARD_RECOVERY_DTBO_SIZE := 50828
 BOARD_RECOVERY_DTBO_OFFSET := 15730688
@@ -111,6 +114,44 @@ HAVE_SELINUX := true
 
 # Excludes
 TW_EXCLUDE_TWRPAPP := true
+
+#SkyHawk Recovery Project Build Flags
+# NOTE - Dont use '-' or blank spaces in flag values , otherwise it will create build errors or other bugs in recovery (Excluding SHRP_PATH,SHRP_REC). 
+# Path of your SHRP Tree
+SHRP_PATH := device/Cherry_Mobile/Flare_S8
+# Maintainer name *
+SHRP_MAINTAINER := Nanik
+# Device codename *
+SHRP_DEVICE_CODE := Flare_S8
+# Recovery Type (It can be treble,normal,SAR) [Only for About Section] *
+SHRP_REC_TYPE := Treble
+# Recovery Type (It can be A/B or A_only) [Only for About Section] *
+SHRP_DEVICE_TYPE := A-Only
+#Rounded Corner
+SHRP_STATUSBAR_RIGHT_PADDING := 40
+SHRP_STATUSBAR_LEFT_PADDING := 40
+#Notch
+SHRP_NOTCH := true
+#theme patching
+SHRP_EXPRESS := true
+#Dark Mode
+SHRP_DARK := true
+#EDL Mode
+SHRP_EDL_MODE := 1
+#Device Path
+SHRP_EXTERNAL := /external_sd
+SHRP_INTERNAL := /sdcard
+SHRP_OTG := /usbotg
+#FlashLight
+SHRP_FLASH := 1
+#SHRP_CUSTOM_FLASHLIGHT := true
+#SHRP_FONP_1 := /sys/class/leds/led:torch_0/brightness
+#SHRP_FONP_2 := /sys/class/leds/led:torch_1/brightness
+#SHRP_FONP_3 := /sys/class/leds/led:switch/brightness
+#Max Brightness of led
+#SHRP_FLASH_MAX_BRIGHTNESS := 200
+#recovery Path
+SHRP_REC := /dev/block/platform/bootdevice/by-name/recovery
 
 # If build on minimal-manifest sources
 ALLOW_MISSING_DEPENDENCIES=true
