@@ -61,7 +61,7 @@ jobs:
             export ALLOW_MISSING_DEPENDENCIES=true
             export LC_ALL="C"
             source build/envsetup.sh
-            lunch omni_x930-eng
+            lunch omni_x930-userdebug
             mkdir -p /home/builder/orangefox/out/target/product/x930/system/etc
             touch /home/builder/orangefox/out/target/product/x930/system/etc/ld.config.txt
             
