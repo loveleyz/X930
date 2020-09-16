@@ -12,7 +12,7 @@ jobs:
       ## Add the following Token in encrypted form inside CircleCI
       # GITHUB_TOKEN: '' # GitHub OAuth Token, for release. Has been set in context.
       Device_Tree: 'https://github.com/loveleyz/X930/' # The Full URL of DT
-      BUILDTYPE: 'userdebug' # Set as eng or userdebug
+      BUILDTYPE: 'eng' # Set as eng or userdebug
       VER: '2.3'
     working_directory: /home/builder/shrp/
     steps:
