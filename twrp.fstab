@@ -39,5 +39,7 @@
 /dtbo emmc /dev/block/platform/bootdevice/by-name/dtbo flags=backup=1
 /persist emmc /dev/block/platform/bootdevice/by-name/persist flags=backup=1
 /teksunhw emmc /dev/block/platform/bootdevice/by-name/teksunhw flags=backup=1
+/preloader_a emmc /dev/block/platform/bootdevice/preloader_a flags=display="preloader_a";backup=1;flashimg=1
+/preloader_b emmc /dev/block/platform/bootdevice/preloader_b flags=display="preloader_b";backup=1;flashimg=1
 /external_sd auto /dev/block/mmcblk1p1 /dev/block/mmcblk1 flags=display="External SDcard";storage;wipeingui;removable;backup=0
 /usbotg auto /dev/block/sda1 /dev/block/sda flags=display="USB-OTG";storage;wipeingui;removable;backup=0
