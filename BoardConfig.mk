@@ -135,11 +135,11 @@ SHRP_PATH := device/Cherry_Mobile/Flare_S8
 # Maintainer name *
 SHRP_MAINTAINER := Nanik
 # Device codename *
-SHRP_DEVICE_CODE := Flare_S8
+SHRP_DEVICE_CODE := x930
 # Recovery Type (It can be treble,normal,SAR) [Only for About Section] *
-SHRP_REC_TYPE := Treble
+SHRP_REC_TYPE := SAR
 # Recovery Type (It can be A/B or A_only) [Only for About Section] *
-SHRP_DEVICE_TYPE := A-Only
+SHRP_DEVICE_TYPE := A_only
 #Rounded Corner
 SHRP_STATUSBAR_RIGHT_PADDING := 40
 SHRP_STATUSBAR_LEFT_PADDING := 40
