@@ -58,7 +58,6 @@ jobs:
             # Add those retains into local commit
             repo forall vendor/omni -c "git commit -m 'Fix Build from forked/personal repos'"
             echo -e "\nPreparing Delicious Lunch..."
-            export OF_VANILLA_BUILD=1
             export ALLOW_MISSING_DEPENDENCIES=true
             export LC_ALL="C"
             source build/envsetup.sh
