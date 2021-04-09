@@ -7,7 +7,7 @@ jobs:
       MANIFEST_BRANCH: 'android-9.0'
       # PBRP_BRANCH: '' # OPTIONAL:: If not default 'android-9.0', define other bootable_recovery branch
       VERSION: '3.0.0'
-      MAINTAINER: 'Nanik @loveleyz'
+      MAINTAINER: 'Nanik14 @loveleyz'
       VENDOR: 'cherry_mobile'
       CODENAME: 'x930'
       FLAVOR: 'eng'
