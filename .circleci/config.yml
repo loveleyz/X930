@@ -24,6 +24,15 @@ jobs:
           command: |
             wget -q https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/pb/build.sh
             source build.sh
+            echo "Ready to Deploy"
+            mkdir upload
+            export version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
+            cp out/target/product/${CODENAME}/recovery.img upload/PBRP-${version}-${CODENAME}-$nowTime-Unofficial.img
+            cp out/target/product/${CODENAME}/*.img upload/
+            cp out/target/product/${CODENAME}/*.zip upload/
+            cp out/target/product/${CODENAME}/ramdisk* upload/
+            ls -lA upload/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -n "Latest PBRP Release for $(echo $CODENAME)" -b "PBRP $(echo $version)" -delete twrp_v${version} upload/
 workflows:
   version: 2
   build_and_test:
