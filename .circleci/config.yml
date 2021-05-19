@@ -49,9 +49,6 @@ jobs:
             
             repo sync -c -q --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
             
-            #rm -rf bootable/recovery
-            #git clone --quiet --progress https://github.com/loveleyz/android_bootable_recovery -b android-9.0 --single-branch bootable/recovery
-            
             # Unshallow vendor_omni
             repo forall vendor/omni -c "git fetch --unshallow omnirom android-9.0"
             # Retain "roomservice: Do not overwrite existing repositories"
